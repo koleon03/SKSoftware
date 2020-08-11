@@ -7,7 +7,7 @@ aufP = "BOARD13"
 aufM = "BOARD11"
 zuP = "BOARD18"
 zuM = "BOARD16"
-delay = 15
+delay = 20
 
 relayAP = gpiozero.OutputDevice(pin=aufP, active_high=True, initial_value=False)
 relayAM = gpiozero.OutputDevice(pin=aufM, active_high=True, initial_value=False)
