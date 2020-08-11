@@ -14,13 +14,8 @@ relayAM = gpiozero.OutputDevice(pin=aufM, active_high=True, initial_value=False)
 relayZP = gpiozero.OutputDevice(pin=zuP, active_high=True, initial_value=False)
 relayZM = gpiozero.OutputDevice(pin=zuM, active_high=True, initial_value=False)
 
-b = open()
-if(b == True):
-    print("Succesful")
-    exit()
-else:
-    print("Fatal Exception")
-    exit()
+open()
+close()
 
 def clear():
     relayAM.off()
