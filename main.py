@@ -23,6 +23,7 @@ def clear():
     relayZM.off()
 
 def openMotor():
+    global isOpen
     if(isOpen == False):
         relayAM.on()
         relayAP.on()
@@ -34,6 +35,7 @@ def openMotor():
         return False
 
 def closeMotor():
+    global isOpen
     if(isOpen == False):
         return False
     else:
