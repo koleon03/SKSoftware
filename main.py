@@ -1,15 +1,18 @@
-import pigpio as p
+import gpiozero
 import time
 
 isOpen = False
 
-aufP = 13
-aufM = 11
-zuP = 18
-zuM = 16
+aufP = "BOARD13"
+aufM = "BOARD11"
+zuP = "BOARD18"
+zuM = "BOARD16"
 delay = 10
 
-pi = p.pi()
+relayAP = gpiozero.OutputDevice(pin=aufP, active_high=True, initial_value=False)
+relayAM = gpiozero.OutputDevice(pin=aufM, active_high=True, initial_value=False)
+relayZP = gpiozero.OutputDevice(pin=zuP, active_high=True, initial_value=False)
+relayZM = gpiozero.OutputDevice(pin=zuM, active_high=True, initial_value=False)
 
 b = open()
 if(b == True):
@@ -20,15 +23,15 @@ else:
     exit()
 
 def clear():
-    pi.write(aufP,0)
-    pi.write(aufM,0)
-    pi.write(zuP,0)
-    pi.write(zuM,0)
+    relayAM.off()
+    relayAP.off()
+    relayZP.off()
+    relayZM.off()
 
 def open():
     if(isOpen == False):
-        pi.write(aufP,1)
-        pi.write(aufM,1)
+        relayAM.on()
+        relayAP.on()
         time.sleep(delay)
         clear()
         isOpen = True
@@ -40,8 +43,8 @@ def close():
     if(isOpen == False):
         return False
     else:
-        pi.write(zuP,1)
-        pi.write(zuM,1)
+        relayZM.on()
+        relayZP.on()
         time.sleep(delay)
         clear()
         isOpen = False
