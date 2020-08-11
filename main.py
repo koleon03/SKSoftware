@@ -14,8 +14,7 @@ relayAM = gpiozero.OutputDevice(pin=aufM, active_high=True, initial_value=False)
 relayZP = gpiozero.OutputDevice(pin=zuP, active_high=True, initial_value=False)
 relayZM = gpiozero.OutputDevice(pin=zuM, active_high=True, initial_value=False)
 
-openMotor()
-closeMotor()
+
 
 def clear():
     relayAM.off()
@@ -44,3 +43,6 @@ def closeMotor():
         clear()
         isOpen = False
         return True
+
+openMotor()
+closeMotor()
