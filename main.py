@@ -9,7 +9,7 @@ zuP = 18
 zuM = 16
 delay = 10
 
-pi = pigpio.pi()
+pi = p.pi()
 
 b = open()
 if(b == True):
