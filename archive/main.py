@@ -3,10 +3,10 @@ import time
 
 isOpen = False
 
-aufP = "BOARD13"
-aufM = "BOARD11"
-zuP = "BOARD18"
-zuM = "BOARD16"
+aufP = "BOARD36"
+aufM = "BOARD32"
+zuP = "BOARD31"
+zuM = "BOARD33"
 delay = 5
 
 relayAP = gpiozero.OutputDevice(pin=aufP, active_high=True, initial_value=False)
