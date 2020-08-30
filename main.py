@@ -82,7 +82,9 @@ while True:
     if event == sg.WIN_CLOSED or event == 'Cancel':
         break
     tempC = readTemp()
+    print(1)
     tempText.update(value=tempC)
+    print("Test")
     if tempC is not None:
         #Temperaturvergleich
         if(tempC > 30):
