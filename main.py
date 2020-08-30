@@ -71,16 +71,11 @@ while True:
     tempC = readTemp()
     if tempC is not None:
         #Temperaturvergleich
-        print("1")
-        if(tempC > 25):
-            print("2")
+        if(tempC > 30):
             if isOpen == False:
-                print("3")
                 openMotor()
-        elif(tempC < 20):
-            print("4")
+        elif(tempC < 25):
             if isOpen == True:
-                print("5")
                 closeMotor()
     time.sleep(120)
                 
