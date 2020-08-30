@@ -1,6 +1,8 @@
 import gpiozero
 import time
 import adafruit_bme280
+import board
+import busio
 
 
 #Globale Variablen
@@ -16,6 +18,7 @@ relayAP = gpiozero.OutputDevice(pin=aufP, active_high=True, initial_value=False)
 relayAM = gpiozero.OutputDevice(pin=aufM, active_high=True, initial_value=False)
 relayZP = gpiozero.OutputDevice(pin=zuP, active_high=True, initial_value=False)
 relayZM = gpiozero.OutputDevice(pin=zuM, active_high=True, initial_value=False)
+i2c = busio.I2C(board.SCL, board.SDA)
 tempSensor = adafruit_bme280.Adafruit_BME280_I2C(i2c, address = 0x76)
 
 
