@@ -11,7 +11,9 @@ layout = [  [sg.Text('Some text on Row 1')],
 window = sg.Window('Window Title', layout)
 # Event Loop to process "events" and get the "values" of the inputs
 while True:
+    print("1")
     event, values = window.read()
+    print("2")
     if event == sg.WIN_CLOSED or event == 'Cancel':	# if user closes window or clicks cancel
         break
     print('You entered ', values[0])

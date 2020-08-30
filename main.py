@@ -29,7 +29,7 @@ tempText = sg.Text("0")
 layout = [ [sg.Text("Temperatur: "), tempText] ]
 
 # Create the Window
-window = sg.Window('Window Title', layout, size=(480,320))
+window = sg.Window('Test', layout, size=(1920,1080))
 
 
 #Alle Relais ausschalten
