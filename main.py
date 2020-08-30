@@ -59,7 +59,7 @@ def closeMotor():
 def readTemp():
     try:
         temp = tempSensor.temperature
-        print("\nTemperature: %0.1f C" % tempSensor.temperature)
+        print(temp)
         return temp
     except RuntimeError as e:
         print(e.args[0])
