@@ -59,7 +59,7 @@ def closeMotor():
 def readTemp():
     try:
         temp = tempSensor.temperature
-        print("Read the temperature at " + temp + "C")
+        print("\nTemperature: %0.1f C" % tempSensor.temperature)
         return temp
     except RuntimeError as e:
         print(e.args[0])
@@ -68,7 +68,6 @@ def readTemp():
 
 #Hauptschleife
 while True:
-    time.sleep(120)
     tempC = readTemp()
     if tempC is not None:
         #Temperaturvergleich
@@ -78,6 +77,7 @@ while True:
         elif(tempC < 20):
             if isOpen == True:
                 closeMotor()
+    time.sleep(120)
                 
 
 
