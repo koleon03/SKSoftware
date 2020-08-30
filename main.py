@@ -79,7 +79,6 @@ print("1")
 #Hauptschleife
 while True:
     print("2")
-    event,values = window.read()
     print("3")
     tempC = readTemp()
     print("4")
@@ -92,6 +91,7 @@ while True:
         elif(tempC < 25):
             if isOpen == True:
                 closeMotor()
+    event,values = window.read()
     if event == sg.WIN_CLOSED or event == 'Cancel':
         break
     
