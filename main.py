@@ -82,7 +82,7 @@ while True:
     if event == sg.WIN_CLOSED or event == 'Cancel':
         break
     tempC = readTemp()
-    tempText.update(tempC)
+    tempText.update(value=tempC)
     if tempC is not None:
         #Temperaturvergleich
         if(tempC > 30):
@@ -92,7 +92,7 @@ while True:
             if isOpen == True:
                 closeMotor()
     
-                
+window.close()
 
 
 
