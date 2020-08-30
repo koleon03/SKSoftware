@@ -3,6 +3,7 @@ import time
 import adafruit_bme280
 import board
 import busio
+import PySimpleGUI as sg
 
 
 #Globale Variablen
@@ -13,6 +14,7 @@ zuP = "BOARD31"
 zuM = "BOARD33"
 delay = 5
 
+
 #Initialisieren der Relais und Sensoren
 relayAP = gpiozero.OutputDevice(pin=aufP, active_high=True, initial_value=False)
 relayAM = gpiozero.OutputDevice(pin=aufM, active_high=True, initial_value=False)
@@ -20,6 +22,14 @@ relayZP = gpiozero.OutputDevice(pin=zuP, active_high=True, initial_value=False)
 relayZM = gpiozero.OutputDevice(pin=zuM, active_high=True, initial_value=False)
 i2c = busio.I2C(board.SCL, board.SDA)
 tempSensor = adafruit_bme280.Adafruit_BME280_I2C(i2c, address = 0x76)
+sg.theme('DarkAmber')	# Add a touch of color
+tempText = sg.Text("0")
+# All the stuff inside your window.
+
+layout = [ [sg.Text("Temperatur: "), tempText] ]
+
+# Create the Window
+window = sg.Window('Window Title', layout, size=(480,320))
 
 
 #Alle Relais ausschalten
@@ -68,7 +78,11 @@ def readTemp():
 
 #Hauptschleife
 while True:
+    event,values = window.read()
+    if event == sg.WIN_CLOSED or event == 'Cancel':
+        break
     tempC = readTemp()
+    tempText.update(tempC)
     if tempC is not None:
         #Temperaturvergleich
         if(tempC > 30):
@@ -77,7 +91,7 @@ while True:
         elif(tempC < 25):
             if isOpen == True:
                 closeMotor()
-    time.sleep(120)
+    
                 
 
 
