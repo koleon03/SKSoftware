@@ -75,7 +75,7 @@ def readTemp():
         print(e.args[0])
         return None
 
-
+print("Testfelö")
 #Hauptschleife
 while True:
     event,values = window.read()
