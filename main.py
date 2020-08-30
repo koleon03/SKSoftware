@@ -75,14 +75,15 @@ def readTemp():
         print(e.args[0])
         return None
 
-print("Testfelö")
+print("1")
 #Hauptschleife
 while True:
+    print("2")
     event,values = window.read()
+    print("3")
     tempC = readTemp()
-    print(1)
+    print("4")
     tempText.update(value=tempC)
-    print("Test")
     if tempC is not None:
         #Temperaturvergleich
         if(tempC > 30):
