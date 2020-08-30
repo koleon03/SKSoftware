@@ -69,7 +69,7 @@ while True:
     tempC = readTemp()
     if tempC is not None:
         #Temperaturvergleich
-        if(tempC > 30):
+        if(tempC > 25):
             if isOpen == False:
                 openMotor()
         elif(tempC < 20):
