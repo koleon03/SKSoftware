@@ -7,10 +7,10 @@ import busio
 
 #Globale Variablen
 isOpen = False
-aufP = "BOARD13"
-aufM = "BOARD11"
-zuP = "BOARD18"
-zuM = "BOARD16"
+aufP = "BOARD36"
+aufM = "BOARD32"
+zuP = "BOARD31"
+zuM = "BOARD33"
 delay = 5
 
 #Initialisieren der Relais und Sensoren
