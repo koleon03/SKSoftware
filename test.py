@@ -89,6 +89,8 @@ def afterOpening(oldValue):
         if(is2Open == False):
             openMotor()
             is2Open = True
+        if(luefterOn == True):
+            relayL.off()
         afterOpening(newValue)
     elif(newValue < 30):
         if(is2Open == True):
@@ -108,11 +110,14 @@ while True:
         #Temperaturvergleich
         if(tempC > 30):
             if isOpen == False:
-                openMotor()
+                if(isOpen == False):
+                    openMotor()
+                    isOpen = True
                 afterOpening(tempC)
         elif(tempC < 25):
             if isOpen == True:
                 closeMotor()
+                isOpen = False
     
     
 
