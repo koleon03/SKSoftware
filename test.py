@@ -80,22 +80,30 @@ def readTemp():
 
 
 def afterOpening(oldValue):
+    global is2Open
+    global luefterOn
     time.sleep(60)
     newValue = readTemp()
     if(newValue > oldValue):
-        openMotor()
-        relayL.on()
-        is2Open = True
+        if(is2Open == False):
+            openMotor()
+            is2Open = True
+        if(luefterOn == False):
+            relayL.on()
+            luefterOn = True
         afterOpening()
     elif(newValue > 30):
-        openMotor()
-        is2Open = True
+        if(is2Open == False):
+            openMotor()
+            is2Open = True
         afterOpening()
     elif(newValue < 30):
         if(is2Open == True):
             closeMotor()
+            is2Open = False
         if(luefterOn == True):
             relayL.off()
+            luefterOn = False
     
 
 
