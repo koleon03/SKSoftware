@@ -44,29 +44,22 @@ def clear():
 
 #Funktion zum Öffnen des Motors
 def openMotor():
-    global isOpen
-    if(isOpen == False):
+   
         relayAM.on()
         relayAP.on()
         time.sleep(delay)
         clear()
         isOpen = True
-        return True
-    else:
-        return False
+    
 
 #Funktion zum Schließen des Motors
-def closeMotor():
-    global isOpen
-    if(isOpen == False):
-        return False
-    else:
-        relayZM.on()
-        relayZP.on()
-        time.sleep(delay)
-        clear()
-        isOpen = False
-        return True
+def closeMotor():  
+    relayZM.on()
+    relayZP.on()
+    time.sleep(delay)
+    clear()
+    isOpen = False
+     
 
 #Funktion zum Auslesen der Temperatur
 def readTemp():
