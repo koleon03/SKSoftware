@@ -91,12 +91,12 @@ def afterOpening(oldValue):
         if(luefterOn == False):
             relayL.on()
             luefterOn = True
-        afterOpening()
+        afterOpening(newValue)
     elif(newValue > 30):
         if(is2Open == False):
             openMotor()
             is2Open = True
-        afterOpening()
+        afterOpening(newValue)
     elif(newValue < 30):
         if(is2Open == True):
             closeMotor()
