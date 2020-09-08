@@ -93,18 +93,4 @@ def afterOpening(oldValue):
             luefterOn = False
     
 
-#Hauptschleife
-while True:
-    tempC = readTemp()
-    if tempC is not None:
-        #Temperaturvergleich
-        if(tempC > 30):
-            if isOpen == False:
-                if(isOpen == False):
-                    openMotor()
-                    isOpen = True
-                afterOpening(tempC)
-        elif(tempC < 25):
-            if isOpen == True:
-                closeMotor()
-                isOpen = False
+relayL.on()
