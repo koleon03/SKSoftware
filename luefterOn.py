@@ -94,3 +94,4 @@ def afterOpening(oldValue):
     
 
 relayL.on()
+time.sleep(10)

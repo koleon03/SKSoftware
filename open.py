@@ -11,7 +11,7 @@ aufP = "BOARD36"
 aufM = "BOARD32"
 zuP = "BOARD31"
 zuM = "BOARD33"
-delay = 5
+delay = 15
 
 #Initialisieren der Relais und Sensoren
 relayAP = gpiozero.OutputDevice(pin=aufP, active_high=True, initial_value=False)
