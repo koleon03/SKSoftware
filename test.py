@@ -25,7 +25,7 @@ lfText = sg.Text("0")
 layout = [[sg.Text("Gewächshaus-Management")],
           [sg.Text("Temperatur: "), tempText, sg.Text("Luftfeuchtigkeit: "), lfText]
 ]
-window = sg.Window(layout=layout, no_titlebar=True, keep_on_top=True, finalize=True)
+window = sg.Window("Title",layout=layout, no_titlebar=True, keep_on_top=True, finalize=True)
 
 #Initialisieren der Relais und Sensoren
 relayAP = gpiozero.OutputDevice(pin=aufP, active_high=True, initial_value=False)
