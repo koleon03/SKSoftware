@@ -3,7 +3,7 @@ import time
 import adafruit_bme280
 import board
 import busio
-
+import PySimpleGUI as sg
 
 
 #Globale Variablen
@@ -17,6 +17,15 @@ zuM = "BOARD33"
 lPin = "BOARD37"
 delay = 5
 
+
+#GUI erstellen
+sg.theme('Dark Blue 3')
+tempText = sg.Text('0')
+lfText = sg.Text("0")
+layout = [[sg.Text("Gewächshaus-Management")],
+          [sg.Text("Temperatur: "), tempText, sg.Text("Luftfeuchtigkeit: "), lfText]
+]
+window = sg.Window(layout=layout, no_titlebar=True, keep_on_top=True, finalize=True)
 
 #Initialisieren der Relais und Sensoren
 relayAP = gpiozero.OutputDevice(pin=aufP, active_high=True, initial_value=False)
@@ -96,6 +105,9 @@ def afterOpening(oldValue):
 #Hauptschleife
 while True:
     tempC = readTemp()
+    event, values = window.read()
+    if event == sg.WIN_CLOSED or event == 'Exit':
+        break
     if tempC is not None:
         #Temperaturvergleich
         if(tempC > 30):
@@ -108,3 +120,5 @@ while True:
             if isOpen == True:
                 closeMotor()
                 isOpen = False
+
+window.close()
