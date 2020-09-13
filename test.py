@@ -67,7 +67,7 @@ def closeMotor():
 def readTemp():
     try:
         temp = tempSensor.temperature
-        print(temp)
+       # print(temp)
         return temp
     except RuntimeError as e:
         print(e.args[0])
@@ -106,6 +106,7 @@ def updateTempText():
     t = readTemp()
     if t is not None:
         tempText.update(t)
+        print("Executed!")
     
 
 schedule.every(10).seconds.do(updateTempText)
