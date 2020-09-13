@@ -22,7 +22,7 @@ delay = 5
 sg.theme('Dark Blue 3')
 tempText = sg.Text('0')
 lfText = sg.Text("0")
-layout = [[sg.Text("Gewächshaus-Management")],
+layout = [[sg.Text("Gewächshaus-Management", size=(1,10))],
           [sg.Text("Temperatur: "), tempText, sg.Text("Luftfeuchtigkeit: "), lfText]
 ]
 window = sg.Window("Title",layout=layout, no_titlebar=True, keep_on_top=True, finalize=True)
@@ -105,9 +105,7 @@ def afterOpening(oldValue):
 #Hauptschleife
 while True:
     tempC = readTemp()
-    event, values = window.read()
-    if event == sg.WIN_CLOSED or event == 'Exit':
-        break
+    tempText.update(readTemp)
     if tempC is not None:
         #Temperaturvergleich
         if(tempC > 30):
