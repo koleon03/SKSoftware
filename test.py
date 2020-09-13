@@ -104,12 +104,12 @@ def afterOpening(oldValue):
 def updateTempText():
     t = readTemp()
     if t is not None:
+        window.finalize()
         window["-TEMP-"].update(t)
         print("Executed!")
     
 
 schedule.every(10).seconds.do(updateTempText)
-window.finalize()
 #Hauptschleife
 while True:
     tempC = readTemp()
