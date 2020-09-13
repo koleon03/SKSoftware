@@ -22,7 +22,7 @@ delay = 5
 sg.theme('Dark Blue 3')
 tempText = sg.Text('0')
 lfText = sg.Text("0")
-layout = [[sg.Text("Gewächshaus-Management", size=(1,10))],
+layout = [[sg.Text("Gewächshaus-Management", size=(10,1))],
           [sg.Text("Temperatur: "), tempText, sg.Text("Luftfeuchtigkeit: "), lfText]
 ]
 window = sg.Window("Title",layout=layout, no_titlebar=True, keep_on_top=True, finalize=True)
@@ -105,6 +105,7 @@ def afterOpening(oldValue):
 #Hauptschleife
 while True:
     tempC = readTemp()
+    window.finalize()
     tempText.update(readTemp)
     if tempC is not None:
         #Temperaturvergleich
