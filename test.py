@@ -4,6 +4,7 @@ import adafruit_bme280
 import board
 import busio
 import PySimpleGUI as sg
+import schedule
 
 
 #Globale Variablen
@@ -22,7 +23,7 @@ delay = 5
 sg.theme('Dark Blue 3')
 tempText = sg.Text('0')
 lfText = sg.Text("0")
-layout = [[sg.Text("Gewächshaus-Management", size=(10,1))],
+layout = [[sg.Text("Gewächshaus-Management")],
           [sg.Text("Temperatur: "), tempText, sg.Text("Luftfeuchtigkeit: "), lfText]
 ]
 window = sg.Window("Title",layout=layout, no_titlebar=True, keep_on_top=True, finalize=True)
@@ -100,13 +101,19 @@ def afterOpening(oldValue):
         if(luefterOn == True):
             relayL.off()
             luefterOn = False
+
+def updateTempText():
+    t = readTemp()
+    if t is not None:
+        tempText.update(t)
     
+
+schedule.every(10).seconds.do(updateTempText)
 
 #Hauptschleife
 while True:
     tempC = readTemp()
-    window.finalize()
-    tempText.update(readTemp)
+    schedule.run_pending()
     if tempC is not None:
         #Temperaturvergleich
         if(tempC > 30):
