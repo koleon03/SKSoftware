@@ -109,7 +109,7 @@ def updateTempText():
     
 
 schedule.every(10).seconds.do(updateTempText)
-
+window.finalize()
 #Hauptschleife
 while True:
     tempC = readTemp()
