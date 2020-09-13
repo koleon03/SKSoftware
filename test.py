@@ -21,10 +21,9 @@ delay = 5
 
 #GUI erstellen
 sg.theme('Dark Blue 3')
-tempText = sg.Text('0')
-lfText = sg.Text("0")
+
 layout = [[sg.Text("Gewächshaus-Management")],
-          [sg.Text("Temperatur: "), tempText, sg.Text("Luftfeuchtigkeit: "), lfText]
+          [sg.Text("Temperatur: "), sg.Text("0", key="-TEMP-"), sg.Text("Luftfeuchtigkeit: "), sg.Text("0", key="-LF-")]
 ]
 window = sg.Window("Title",layout=layout, no_titlebar=True, keep_on_top=True, finalize=True)
 
@@ -105,7 +104,7 @@ def afterOpening(oldValue):
 def updateTempText():
     t = readTemp()
     if t is not None:
-        tempText.update(t)
+        window["-TEMP-"].update(t)
         print("Executed!")
     
 
