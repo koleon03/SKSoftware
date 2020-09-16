@@ -15,8 +15,8 @@ import screeninfo
 class Ui_main(object):
     def setupUi(self, main):
         main.setObjectName("main")
-        resX = screeninfo.Monitor.x
-        resY = screeninfo.Monitor.y
+        resX = screeninfo.Monitor.width
+        resY = screeninfo.Monitor.height
         main.resize(resX,resY)
         self.verticalLayoutWidget = QtWidgets.QWidget(main)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(-1, -1, resX, resY))
