@@ -81,7 +81,7 @@ class Worker(QtCore.QRunnable):
         self.args = args
         self.kwargs = kwargs
 
-    @QtCore.Slot()
+    @QtCore.pyqtSlot()
     def run(self):
         while True:
             tempC = readTemp()
