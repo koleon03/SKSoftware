@@ -16,7 +16,7 @@ class Ui_main(object):
         main.setObjectName("main")
         main.resize(480,320)
         self.verticalLayoutWidget = QtWidgets.QWidget(main)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(-1, -1, 901, 591))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(-1, -1, 480, 320))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
