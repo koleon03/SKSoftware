@@ -16,8 +16,7 @@ zuP = "BOARD31"
 zuM = "BOARD33"
 lPin = "BOARD37"
 delay = 5
-tempWert = None
-lfWert = None
+
 
 class ApplicationWindow(QtWidgets.QMainWindow):
     def __init__(self):
@@ -29,11 +28,20 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         self.button.clicked.connect(lambda: self.openMotor())
         self.button2 = self.findChild(QtWidgets.QPushButton, 'pushButton_2')
         self.button2.clicked.connect(lambda: self.closeMotor())
-        tempWert = self.findChild(QtWidgets.QLabel, 'tempLabel')
-        lfWert = self.findChild(QtWidgets.QLabel, 'label')
+        self.tempWert = self.findChild(QtWidgets.QLabel, 'tempLabel')
+        self.lfWert = self.findChild(QtWidgets.QLabel, 'label')
         self.threadpool = QtCore.QThreadPool()
+        schedule.every(10).seconds.do(self.updateTexts())
         worker = Worker()
+        worker2 = Worker2()
         self.threadpool.start(worker)
+        self.threadpool.start(worker2)
+    
+    def updateTexts(self):
+        tText = "Temperatur: {} °C"
+        lfText = "Luftfeuchtigkeit: {}"
+        self.tempWert.setText(tText.format(readTemp()))
+        self.lfWert.setText(lfText.format(readLF()))
     
     def openMotor(self):
    
@@ -124,6 +132,18 @@ class Worker(QtCore.QRunnable):
                 relayL.off()
                 self.luefterOn = False
 
+class Worker2(QtCore.QRunnable):
+    def __init__(self, *args, **kwargs):
+        super(Worker, self).__init__()
+        self.args = args
+        self.kwargs = kwargs
+
+    @QtCore.pyqtSlot()
+    def run(self):
+        while True:
+            schedule.run_pending()
+            time.sleep(1)
+
 
 
 #Initialisieren der Relais und Sensoren
@@ -171,7 +191,13 @@ def readTemp():
         print(e.args[0])
         return None
 
-
+def readLF():
+    try:
+        lf = tempSensor.humidity
+        return lf
+    except RuntimeError as e:
+        print(e.args[0])
+        return None
 
 
 def main():
