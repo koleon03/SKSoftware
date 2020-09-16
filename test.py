@@ -27,6 +27,10 @@ class ApplicationWindow(QtWidgets.QMainWindow):
 
         self.ui = Ui_main()
         self.ui.setupUi(self)
+        self.button = self.findChild(QtWidgets.QPushButton, 'buttonOeffnen')
+        self.button.clicked.connect(openMotor())
+        self.button2 = self.findChild(QtWidgets.QPushButton, 'pushButton_2')
+        self.button2.clicked.connect(closeMotor())
 
 
 #Initialisieren der Relais und Sensoren
@@ -106,8 +110,6 @@ def afterOpening(oldValue):
 def main():
     app = QtWidgets.QApplication(sys.argv)
     application = ApplicationWindow()
-    application.buttonOeffnen.clicked.connect(openMotor())
-    application.pushButton_2.clicked.connect(closeMotor())
     application.show()
     sys.exit(app.exec_())
 
