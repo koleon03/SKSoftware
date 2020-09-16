@@ -43,8 +43,8 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         lfText = "Luftfeuchtigkeit: {}"
         tWertZ = readTemp()
         lfWertZ = readLF()
-        self.tempWert.setText(tText.format(tWertZ.round()))
-        self.lfWert.setText(lfText.format(lfWertZ.round()))
+        self.tempWert.setText(tText.format(int(tWertZ)))
+        self.lfWert.setText(lfText.format(int(lfWertZ)))
     
     def openMotor(self):
    
