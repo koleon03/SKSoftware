@@ -110,6 +110,9 @@ def main():
     sys.exit(app.exec_())
 
 
+Ui_main.buttonOeffnen.clicked.connect(openMotor())
+Ui_main.pushButton_2.clicked.connect(closeMotor())
+
 if __name__ == "__main__":
     main()
 
