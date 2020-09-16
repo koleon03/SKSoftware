@@ -50,7 +50,7 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         clear()
         isOpen = False
 
-class WorkerSignals(QObject):
+class WorkerSignals(QtCore.QObject):
     '''
     Defines the signals available from a running worker thread.
 
