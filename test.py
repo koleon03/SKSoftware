@@ -106,6 +106,8 @@ def afterOpening(oldValue):
 def main():
     app = QtWidgets.QApplication(sys.argv)
     application = ApplicationWindow()
+    application.buttonOeffnen.clicked.connect(openMotor())
+    application.pushButton_2.clicked.connect(closeMotor())
     application.show()
     sys.exit(app.exec_())
 

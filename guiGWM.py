@@ -10,7 +10,6 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import screeninfo
-import test
 
 
 class Ui_main(object):
@@ -69,8 +68,6 @@ class Ui_main(object):
         self.verticalLayout_3.addWidget(self.pushButton_2)
         self.horizontalLayout.addLayout(self.verticalLayout_3)
         self.verticalLayout.addLayout(self.horizontalLayout)
-        self.buttonOeffnen.clicked.connect(test.openMotor())
-        self.pushButton_2.clicked.connect(test.closeMotor())
         self.retranslateUi(main)
         QtCore.QMetaObject.connectSlotsByName(main)
 
