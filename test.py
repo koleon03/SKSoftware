@@ -31,7 +31,7 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         self.tempWert = self.findChild(QtWidgets.QLabel, 'tempLabel')
         self.lfWert = self.findChild(QtWidgets.QLabel, 'label')
         self.threadpool = QtCore.QThreadPool()
-        schedule.every(10).seconds.do(self.updateTexts())
+        schedule.every(10).seconds.do(lambda: self.updateTexts())
         worker = Worker()
         worker2 = Worker2()
         self.threadpool.start(worker)
@@ -134,7 +134,7 @@ class Worker(QtCore.QRunnable):
 
 class Worker2(QtCore.QRunnable):
     def __init__(self, *args, **kwargs):
-        super(Worker, self).__init__()
+        super(Worker2, self).__init__()
         self.args = args
         self.kwargs = kwargs
 
