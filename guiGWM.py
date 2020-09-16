@@ -15,11 +15,9 @@ import screeninfo
 class Ui_main(object):
     def setupUi(self, main):
         main.setObjectName("main")
-        resX = screeninfo.Monitor.width
-        resY = screeninfo.Monitor.height
-        main.resize(resX,resY)
+        main.resize(896,582)
         self.verticalLayoutWidget = QtWidgets.QWidget(main)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(-1, -1, resX, resY))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(-1, -1, 901, 591))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -70,7 +68,7 @@ class Ui_main(object):
         self.verticalLayout_3.addWidget(self.pushButton_2)
         self.horizontalLayout.addLayout(self.verticalLayout_3)
         self.verticalLayout.addLayout(self.horizontalLayout)
-
+        self.verticalLayoutWidget.showFullScreen(self.verticalLayoutWidget)
         self.retranslateUi(main)
         QtCore.QMetaObject.connectSlotsByName(main)
 
