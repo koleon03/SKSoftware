@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_main(object):
     def setupUi(self, main):
         main.setObjectName("main")
-        main.resize(400,300)
+        main.resize(300,320)
         self.verticalLayoutWidget = QtWidgets.QWidget(main)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(-1, -1, 300, 320))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
