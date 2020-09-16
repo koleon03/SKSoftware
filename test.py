@@ -5,21 +5,19 @@ import board
 import busio
 import schedule
 from guiGWM import Ui_main
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 import sys
 
 
-#Globale Variablen
-isOpen = False
-is2Open = False
-luefterOn = False
+
 aufP = "BOARD36"
 aufM = "BOARD32"
 zuP = "BOARD31"
 zuM = "BOARD33"
 lPin = "BOARD37"
 delay = 5
-
+tempWert = None
+lfWert = None
 
 class ApplicationWindow(QtWidgets.QMainWindow):
     def __init__(self):
@@ -31,6 +29,11 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         self.button.clicked.connect(lambda: self.openMotor())
         self.button2 = self.findChild(QtWidgets.QPushButton, 'pushButton_2')
         self.button2.clicked.connect(lambda: self.closeMotor())
+        tempWert = self.findChild(QtWidgets.QLabel, 'tempLabel')
+        lfWert = self.findChild(QtWidgets.QLabel, 'label')
+        self.threadpool = QtCore.QThreadPool()
+        worker = Worker()
+        self.threadpool.start(worker)
     
     def openMotor(self):
    
@@ -46,6 +49,82 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         time.sleep(delay)
         clear()
         isOpen = False
+
+class WorkerSignals(QObject):
+    '''
+    Defines the signals available from a running worker thread.
+
+    Supported signals are:
+
+    finished
+        No data
+    
+    error
+        `tuple` (exctype, value, traceback.format_exc() )
+    
+    result
+        `object` data returned from processing, anything
+
+    '''
+    finished = QtCore.pyqtSignal()
+    error = QtCore.pyqtSignal(tuple)
+    result = QtCore.pyqtSignal(object)
+
+class Worker(QtCore.QRunnable):
+    
+    isOpen = False
+    is2Open = False
+    luefterOn = False
+
+    def __init__(self, *args, **kwargs):
+        super(Worker, self).__init__()
+        self.args = args
+        self.kwargs = kwargs
+
+    @QtCore.pyqtSlot
+    def run(self):
+        while True:
+            tempC = readTemp()
+            schedule.run_pending()
+            if tempC is not None:
+            #Temperaturvergleich
+                if(tempC > 30):
+                    if self.isOpen == False:
+                        if(self.isOpen == False):
+                            openMotor()
+                            isOpen = True
+                        self.afterOpening(tempC)
+                elif(tempC < 25):
+                    if isOpen == True:
+                        closeMotor()
+                        isOpen = False
+    
+    def afterOpening(self, oldValue):
+        time.sleep(60)
+        newValue = readTemp()
+        if(newValue > oldValue):
+            if(self.is2Open == False):
+                openMotor()
+                is2Open = True
+            if(self.luefterOn == False):
+                relayL.on()
+                luefterOn = True
+            afterOpening(newValue)
+        elif(newValue > 30):
+            if(is2Open == False):
+                openMotor()
+                is2Open = True
+            if(luefterOn == True):
+                relayL.off()
+            afterOpening(newValue)
+        elif(newValue < 30):
+            if(is2Open == True):
+                closeMotor()
+                is2Open = False
+            if(luefterOn == True):
+                relayL.off()
+                luefterOn = False
+
 
 
 #Initialisieren der Relais und Sensoren
@@ -94,33 +173,7 @@ def readTemp():
         return None
 
 
-def afterOpening(oldValue):
-    global is2Open
-    global luefterOn
-    time.sleep(60)
-    newValue = readTemp()
-    if(newValue > oldValue):
-        if(is2Open == False):
-            openMotor()
-            is2Open = True
-        if(luefterOn == False):
-            relayL.on()
-            luefterOn = True
-        afterOpening(newValue)
-    elif(newValue > 30):
-        if(is2Open == False):
-            openMotor()
-            is2Open = True
-        if(luefterOn == True):
-            relayL.off()
-        afterOpening(newValue)
-    elif(newValue < 30):
-        if(is2Open == True):
-            closeMotor()
-            is2Open = False
-        if(luefterOn == True):
-            relayL.off()
-            luefterOn = False
+
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
@@ -137,20 +190,4 @@ if __name__ == "__main__":
     
 
 
-#Hauptschleife
-while True:
-    tempC = readTemp()
-    schedule.run_pending()
-    if tempC is not None:
-        #Temperaturvergleich
-        if(tempC > 30):
-            if isOpen == False:
-                if(isOpen == False):
-                    openMotor()
-                    isOpen = True
-                afterOpening(tempC)
-        elif(tempC < 25):
-            if isOpen == True:
-                closeMotor()
-                isOpen = False
 
