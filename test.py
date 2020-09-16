@@ -28,9 +28,9 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         self.ui = Ui_main()
         self.ui.setupUi(self)
         self.button = self.findChild(QtWidgets.QPushButton, 'buttonOeffnen')
-        self.button.clicked.connect(self.openMotor())
+        self.button.clicked.connect(lambda: self.openMotor())
         self.button2 = self.findChild(QtWidgets.QPushButton, 'pushButton_2')
-        self.button2.clicked.connect(self.closeMotor())
+        self.button2.clicked.connect(lambda: self.closeMotor())
     
     def openMotor(self):
    
