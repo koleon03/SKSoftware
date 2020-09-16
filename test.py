@@ -3,8 +3,10 @@ import time
 import adafruit_bme280
 import board
 import busio
-import PySimpleGUI as sg
 import schedule
+from guiGWM import Ui_main
+from PyQt5 import QtWidgets
+import sys
 
 
 #Globale Variablen
@@ -19,13 +21,12 @@ lPin = "BOARD37"
 delay = 5
 
 
-#GUI erstellen
-sg.theme('Dark Blue 3')
+class ApplicationWindow(QtWidgets.QMainWindow):
+    def __init__(self):
+        super(ApplicationWindow, self).__init__()
 
-layout = [[sg.Text("Gewächshaus-Management")],
-          [sg.Text("Temperatur: "), sg.Text("0", key="-TEMP-"), sg.Text("Luftfeuchtigkeit: "), sg.Text("0", key="-LF-")]
-]
-window = sg.Window("Title",layout=layout, no_titlebar=True, keep_on_top=True, finalize=True)
+        self.ui = Ui_main()
+        self.ui.setupUi(self)
 
 #Initialisieren der Relais und Sensoren
 relayAP = gpiozero.OutputDevice(pin=aufP, active_high=True, initial_value=False)
@@ -101,15 +102,20 @@ def afterOpening(oldValue):
             relayL.off()
             luefterOn = False
 
-def updateTempText():
-    t = readTemp()
-    if t is not None:
-        window.finalize()
-        window["-TEMP-"].update(t)
-        print("Executed!")
+def main():
+    app = QtWidgets.QApplication(sys.argv)
+    application = ApplicationWindow()
+    application.show()
+    sys.exit(app.exec_())
+
+
+if __name__ == "__main__":
+    main()
+
+
     
 
-schedule.every(10).seconds.do(updateTempText)
+
 #Hauptschleife
 while True:
     tempC = readTemp()
@@ -127,4 +133,3 @@ while True:
                 closeMotor()
                 isOpen = False
 
-window.close()
