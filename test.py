@@ -28,9 +28,24 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         self.ui = Ui_main()
         self.ui.setupUi(self)
         self.button = self.findChild(QtWidgets.QPushButton, 'buttonOeffnen')
-        self.button.clicked.connect(openMotor())
+        self.button.clicked.connect(self.openMotor())
         self.button2 = self.findChild(QtWidgets.QPushButton, 'pushButton_2')
-        self.button2.clicked.connect(closeMotor())
+        self.button2.clicked.connect(self.closeMotor())
+    
+    def openMotor(self):
+   
+        relayAM.on()
+        relayAP.on()
+        time.sleep(delay)
+        clear()
+        isOpen = True
+    
+    def closeMotor(self):  
+        relayZM.on()
+        relayZP.on()
+        time.sleep(delay)
+        clear()
+        isOpen = False
 
 
 #Initialisieren der Relais und Sensoren
