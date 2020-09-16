@@ -28,7 +28,7 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         self.ui = Ui_main()
         self.ui.setupUi(self)
 
-ApplicationWindow.showFullScreen(ApplicationWindow)
+ApplicationWindow.showFullScreen(Ui_main)
 #Initialisieren der Relais und Sensoren
 relayAP = gpiozero.OutputDevice(pin=aufP, active_high=True, initial_value=False)
 relayAM = gpiozero.OutputDevice(pin=aufM, active_high=True, initial_value=False)
