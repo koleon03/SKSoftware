@@ -9,14 +9,17 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import screeninfo
 
 
 class Ui_main(object):
     def setupUi(self, main):
         main.setObjectName("main")
-        main.resize(340,320)
+        resX = screeninfo.Monitor.x
+        resY = screeninfo.Monitor.y
+        main.resize(resX,resY)
         self.verticalLayoutWidget = QtWidgets.QWidget(main)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(-1, -1, 340, 320))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(-1, -1, resX, resY))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
