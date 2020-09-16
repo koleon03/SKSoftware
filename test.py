@@ -105,25 +105,25 @@ class Worker(QtCore.QRunnable):
         if(newValue > oldValue):
             if(self.is2Open == False):
                 openMotor()
-                is2Open = True
+                self.is2Open = True
             if(self.luefterOn == False):
                 relayL.on()
-                luefterOn = True
+                self.luefterOn = True
             afterOpening(newValue)
         elif(newValue > 30):
-            if(is2Open == False):
+            if(self.is2Open == False):
                 openMotor()
-                is2Open = True
-            if(luefterOn == True):
+                self.is2Open = True
+            if(self.luefterOn == True):
                 relayL.off()
             afterOpening(newValue)
         elif(newValue < 30):
-            if(is2Open == True):
+            if(self.is2Open == True):
                 closeMotor()
-                is2Open = False
-            if(luefterOn == True):
+                self.is2Open = False
+            if(self.luefterOn == True):
                 relayL.off()
-                luefterOn = False
+                self.luefterOn = False
 
 
 
