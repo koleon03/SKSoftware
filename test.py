@@ -28,7 +28,6 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         self.ui = Ui_main()
         self.ui.setupUi(self)
 
-ApplicationWindow.resize(480,320)
 
 #Initialisieren der Relais und Sensoren
 relayAP = gpiozero.OutputDevice(pin=aufP, active_high=True, initial_value=False)
