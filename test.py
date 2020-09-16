@@ -85,15 +85,14 @@ class Worker(QtCore.QRunnable):
     def run(self):
         while True:
             tempC = readTemp()
-            schedule.run_pending()
             if tempC is not None:
             #Temperaturvergleich
                 if(tempC > 30):
-                    if self.isOpen == False:
-                        if(self.isOpen == False):
-                            openMotor()
-                            self.isOpen = True
-                        self.afterOpening(tempC)
+                    
+                    if(self.isOpen == False):
+                        openMotor()
+                        self.isOpen = True
+                    self.afterOpening(tempC)
                 elif(tempC < 25):
                     if self.isOpen == True:
                         closeMotor()
