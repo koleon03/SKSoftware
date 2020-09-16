@@ -92,12 +92,12 @@ class Worker(QtCore.QRunnable):
                     if self.isOpen == False:
                         if(self.isOpen == False):
                             openMotor()
-                            isOpen = True
+                            self.isOpen = True
                         self.afterOpening(tempC)
                 elif(tempC < 25):
-                    if isOpen == True:
+                    if self.isOpen == True:
                         closeMotor()
-                        isOpen = False
+                        self.isOpen = False
     
     def afterOpening(self, oldValue):
         time.sleep(60)
@@ -109,14 +109,14 @@ class Worker(QtCore.QRunnable):
             if(self.luefterOn == False):
                 relayL.on()
                 self.luefterOn = True
-            afterOpening(newValue)
+            self.afterOpening(newValue)
         elif(newValue > 30):
             if(self.is2Open == False):
                 openMotor()
                 self.is2Open = True
             if(self.luefterOn == True):
                 relayL.off()
-            afterOpening(newValue)
+            self.afterOpening(newValue)
         elif(newValue < 30):
             if(self.is2Open == True):
                 closeMotor()
@@ -166,7 +166,7 @@ def closeMotor():
 def readTemp():
     try:
         temp = tempSensor.temperature
-       # print(temp)
+        print(temp)
         return temp
     except RuntimeError as e:
         print(e.args[0])
