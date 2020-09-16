@@ -31,6 +31,7 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         self.tempWert = self.findChild(QtWidgets.QLabel, 'tempLabel')
         self.lfWert = self.findChild(QtWidgets.QLabel, 'label')
         self.threadpool = QtCore.QThreadPool()
+        self.updateTexts()
         schedule.every(10).seconds.do(lambda: self.updateTexts())
         worker = Worker()
         worker2 = Worker2()
@@ -40,8 +41,10 @@ class ApplicationWindow(QtWidgets.QMainWindow):
     def updateTexts(self):
         tText = "Temperatur: {} °C"
         lfText = "Luftfeuchtigkeit: {}"
-        self.tempWert.setText(tText.format(readTemp()))
-        self.lfWert.setText(lfText.format(readLF()))
+        tWertZ = readTemp()
+        lfWertZ = readLF()
+        self.tempWert.setText(tText.format(tWertZ.round())
+        self.lfWert.setText(lfText.format(lfWertZ.round())
     
     def openMotor(self):
    
