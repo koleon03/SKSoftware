@@ -24,7 +24,6 @@ data = pd.DataFrame({
     "Time": []
 })
 
-data["Temp"]
 
 relayAP = gpiozero.OutputDevice(pin=aufP, active_high=True, initial_value=False)
 relayAM = gpiozero.OutputDevice(pin=aufM, active_high=True, initial_value=False)
