@@ -130,7 +130,7 @@ def afterOpening(oldValue):
 def addData():
     global timedData
     print("Executed!")
-    if(timedData > 600):
+    if(timedData > 1200):
         df = pd.DataFrame(dataList, columns=['Temperature', 'Time'])
         df.to_excel('data.xlsx', sheet_name='Temperaturdaten', index=False)
         sys.exit(0)
