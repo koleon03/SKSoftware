@@ -34,6 +34,23 @@ relayL = gpiozero.OutputDevice(pin=lPin, active_high=True, initial_value=False)
 i2c = busio.I2C(board.SCL, board.SDA)
 tempSensor = adafruit_bme280.Adafruit_BME280_I2C(i2c, address = 0x76)
 
+class Worker2(QtCore.QRunnable):
+    def __init__(self, *args, **kwargs):
+        super(Worker2, self).__init__()
+        self.args = args
+        self.kwargs = kwargs
+
+    @QtCore.pyqtSlot()
+    def run(self):
+        while True:
+            schedule.run_pending()
+            time.sleep(1)
+
+
+threadPool = QtCore.QThreadPool()
+worker = Worker2()
+threadPool.start(worker)
+
 #Alle Relais ausschalten
 def clear():
     relayAM.off()
@@ -112,6 +129,7 @@ def afterOpening(oldValue):
 
 def addData():
     global timedData
+    print("Executed!")
     if(timedData > 300):
         df = pd.DataFrame(dataList, columns=['Temperature', 'Time'])
         df.to_excel('data.xlsx', sheet_name='Temperaturdaten', index=False)
