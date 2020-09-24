@@ -121,7 +121,6 @@ def addData():
 schedule.every(10).seconds.do(addData)
 addData()
 while True:
-    global isOpen
     schedule.run_pending()
     tempC = readTemp()
     if tempC is not None:
