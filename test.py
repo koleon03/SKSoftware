@@ -17,6 +17,7 @@ zuM = "BOARD33"
 lPin = "BOARD37"
 delay = 5
 
+#TODO: Fault checking with open/close buttons
 
 class ApplicationWindow(QtWidgets.QMainWindow):
     def __init__(self):
