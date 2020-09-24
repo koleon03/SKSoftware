@@ -43,7 +43,8 @@ def clear():
 
 #Funktion zum Öffnen des Motors
 def openMotor():
-   
+    global delay
+    global isOpen
     relayAM.on()
     relayAP.on()
     time.sleep(delay)
@@ -53,6 +54,8 @@ def openMotor():
 
 #Funktion zum Schließen des Motors
 def closeMotor():  
+    global delay
+    global isOpen
     relayZM.on()
     relayZP.on()
     time.sleep(delay)
