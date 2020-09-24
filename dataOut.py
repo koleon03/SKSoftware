@@ -15,7 +15,7 @@ zuP = "BOARD31"
 zuM = "BOARD33"
 lPin = "BOARD37"
 delay = 5
-time = 0
+timedData = 0
 isOpen = False
 is2Open = False
 luefterOn = False
@@ -44,11 +44,11 @@ def clear():
 #Funktion zum Öffnen des Motors
 def openMotor():
    
-        relayAM.on()
-        relayAP.on()
-        time.sleep(delay)
-        clear()
-        isOpen = True
+    relayAM.on()
+    relayAP.on()
+    time.sleep(delay)
+    clear()
+    isOpen = True
     
 
 #Funktion zum Schließen des Motors
@@ -108,14 +108,14 @@ def afterOpening(oldValue):
             luefterOn = False
 
 def addData():
-    global time
-    if(time > 300):
+    global timedData
+    if(timedData > 300):
         df = pd.DataFrame(dataList, columns=['Temperature', 'Time'])
         df.to_excel('data.xlsx', sheet_name='Temperaturdaten', index=False)
         sys.exit(0)
     t = readTemp()
-    dataList.append([t, time])
-    time = time + 10
+    dataList.append([t, timedData])
+    timedData = timedData + 10
 
 
 schedule.every(10).seconds.do(addData)
