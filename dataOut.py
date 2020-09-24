@@ -114,7 +114,7 @@ def addData():
         df.to_excel('data.xlsx', sheet_name='Temperaturdaten', index=False)
         sys.exit(0)
     t = readTemp()
-    dataList.append(t, time)
+    dataList.append([t, time])
     time = time + 10
 
 
