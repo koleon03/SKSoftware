@@ -19,6 +19,7 @@ time = 0
 isOpen = False
 is2Open = False
 luefterOn = False
+dataList = []
 data = pd.DataFrame({
     "Temperature": [],
     "Time": []
@@ -109,11 +110,11 @@ def afterOpening(oldValue):
 def addData():
     global time
     if(time > 300):
-        data.to_excel('data.xlsx', sheet_name='Temperaturdaten', index=False)
+        df = pd.DataFrame(dataList, columns=['Temperature', 'Time'])
+        df.to_excel('data.xlsx', sheet_name='Temperaturdaten', index=False)
         sys.exit(0)
     t = readTemp()
-    data["Temperature"].append(t)
-    data["Time"].append(time)
+    dataList.append(t, time)
     time = time + 10
 
 
