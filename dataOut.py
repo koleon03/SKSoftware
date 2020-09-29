@@ -143,15 +143,4 @@ schedule.every(10).seconds.do(addData)
 addData()
 while True:
     schedule.run_pending()
-    tempC = readTemp()
-    if tempC is not None:
-    #Temperaturvergleich
-        if(tempC > 30):         
-            if(isOpen == False):
-                openMotor()
-                isOpen = True
-            afterOpening(tempC)
-        elif(tempC < 25):
-            if isOpen == True:
-                closeMotor()
-                isOpen = False
+
